@@ -9,9 +9,10 @@ TG: https://t.me/HarbourToulu
 cron: 30 0 0,20 * * *
 new Env('邀好友抽现金助力');
 ActivityEntry: https://prodev.m.jd.com/jdlite/active/23CeE8ZXA4uFS9M9mTjtta9T4S5x/index.html
+变量：export inviteDrawPin="车头pin"
 """
 
-import time, requests, sys, re, threading
+import time, requests, sys, re, threading, os, random
 from functools import partial
 print = partial(print, flush=True)
 import warnings
@@ -153,7 +154,8 @@ def get_h5st_body (OOO00OOO0O0O00O0O ,O00OOOO0OOOOOOOO0 ,OO00000OOO0O0O0O0 ,OOOO
     O0OO0000O00O0000O ={"appId":OOOO00OO0O000OO00 ,"appid":"activities_platform","ua":OOO00OOO0O0O00O0O ,"pin":OO0O0O0O0O0O00000 ,"functionId":OO00000OOO0O0O0O0 ,"body":O0OO0000O00O0000O ,"expand":{"url":"https://pro.m.jd.com/jdlite/active/23CeE8ZXA4uFS9M9mTjtta9T4S5x/index.html","og":"https://pro.m.jd.com"},"clientVersion":O00OOO0OOOO0OOOOO ,"version":"4.1"}#line:22
     try :#line:23
         import base64 #line:24
-        OOOO0OOOO00O0O0O0 ="aHR0cDovLzEuOTQuOC4yNDQ6MzAwMS9hcGkvaDVzdA=="#line:25
+        OOOO0OOOO00O0O0O0 = ["aHR0cDovLzEuOTQuOC4yNDQ6MzAwMS9hcGkvaDVzdA==","aHR0cDovL2hhcmJvdXJqLmNmOjMwMDEvYXBpL2g1c3Q="] #line:25
+        OOOO0OOOO00O0O0O0 = random.choice(OOOO0OOOO00O0O0O0)
         OO0OO000OOO00OOO0 =json .dumps (O0OO0000O00O0000O )#line:26
         OO0000OOO0OOOO00O ={'Content-Type':'application/json'}#line:29
         OO00OO0O00OO0OOOO =requests .request ("POST",base64 .b64decode (OOOO0OOOO00O0O0O0 .encode ('utf-8')).decode ('utf-8'),headers =OO0000OOO0OOOO00O ,timeout =10 ,data =OO0OO000OOO00OOO0 ).json ()#line:30
@@ -228,7 +230,16 @@ if __name__ == '__main__':
         print("未获取到有效COOKIE,退出程序！")
         sys.exit()
     inviter = remote_redis(f"inviteFissionBeforeHome", 3)
-    cookie = cks[0] # 获取车头助力码
+    inviteDrawPin = os.environ.get("inviteDrawPin") if os.environ.get("inviteDrawPin") else ""
+    if inviteDrawPin:
+        cookie_ = [ck for ck in cks if inviteDrawPin in ck]
+        if cookie_:
+            cookie = cookie_[0]
+        else:
+            cookie = cks[0]
+    else:
+        cookie = cks[0]
+    # 获取车头助力码
     ua = userAgent()
     for index, linkId in enumerate(linkIds, 1):
         response = H5API(ua, cookie, "inviteFissionBeforeHome", {'linkId': linkId, "isJdApp": True, 'inviter': inviter}, '02f8d').json()
