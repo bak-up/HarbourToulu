@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 """
-File: jd_inviteDrawPrize_JD.py(邀好友抽现金抽奖JD)
+File: jd_inviteDrawPrize_JDPDD.py(邀好友抽现金抽奖JDPDD)
 Author: HarbourJ
 Date: 2023/3/15 10:00
 TG: https://t.me/HarbourToulu
 cron: 30 0 1,21 * * *
-new Env('邀好友抽现金抽奖JD');
-ActivityEntry: https://prodev.m.jd.com/jdlite/active/23CeE8ZXA4uFS9M9mTjtta9T4S5x/index.html
+new Env('邀好友抽现金抽奖JDPDD');
+ActivityEntry: https://pro.m.jd.com/mall/active/3WijvBWPdCirCBr72TzkyiPhgdxJ/index.html
 变量：export inviteDrawPin="车头pin"
 """
 
@@ -34,8 +34,8 @@ except:
     sys.exit(3)
 
 apCashPageSize = 20  # 提现的最大页数，可根据实际情况修改
-linkIds = ['3orGfh1YkwNLksxOcN8zWQ']
-activityUrl = "https://prodev.m.jd.com/jdlite/active/23CeE8ZXA4uFS9M9mTjtta9T4S5x/index.html"
+linkId = "EcuVpjGGfccY3Ic_1ni83w"
+activityUrl = "https://pro.m.jd.com/mall/active/3WijvBWPdCirCBr72TzkyiPhgdxJ/index.html"
 
 
 def getJdTime():
@@ -201,96 +201,96 @@ if __name__ == '__main__':
     i = 0
     redpacket = []
 
-    for index, linkId in enumerate(linkIds, 1):
-        while True:
-            try:
-                info = inviteFissionDrawPrize(ua, cookie, "inviteFissionDrawPrize", "c02c6", {"linkId":linkId})
-                if "活动太火爆" in str(info):
-                    printf(cookie, info)
-                    time.sleep(0.2)
-                    continue
-            except Exception as e:
-                printf(cookie, e)
+    while True:
+        try:
+            info = inviteFissionDrawPrize(ua, cookie, "inviteFissionDrawPrize", "c02c6", {"linkId":linkId})
+            if "活动太火爆" in str(info):
+                printf(cookie, info)
+                time.sleep(3)
                 continue
-            if not info:
-                continue
-            if not info[1]:
-                printf(cookie, f"{info[0]} ⚠️抽奖结果为{info[1]}")
-                continue
-            elif "抽奖次数已用完" in info[1]:
-                printf(cookie, f"{info[0]} ⚠️抽奖次数已用完")
+        except Exception as e:
+            printf(cookie, e)
+            continue
+        if not info:
+            continue
+        if not info[1]:
+            printf(cookie, f"{info[0]} ⚠️抽奖结果为{info[1]}")
+            continue
+        elif "抽奖次数已用完" in info[1]:
+            printf(cookie, f"{info[0]} ⚠️抽奖次数已用完")
+            break
+        elif "本场活动已结束" in info[1]:
+            printf(cookie, f"{info[0]} ⏰本场活动已结束了,快去重新开始吧")
+            break
+        else:
+            if info:
+                total += 1
+                if info[2] == 1:
+                    printf(cookie, f"{info[0]} 🎫获得{info[1]}优惠券")
+                elif info[2] == 2:
+                    printf(cookie, f"{info[0]} 🧧获得{info[1]}红包")
+                    redpacket.append(info[1])
+                else:
+                    printf(cookie, f"{info[0]} 💵获得{info[1]}现金")
+                    cash.append(info[1])
+        # 提现金
+        info = inviteFissionReceive(ua, cookie, "inviteFissionReceive", "b8469", {"linkId": linkId})
+        if "火爆" in str(info):
+            printf(cookie, f"{info['errMsg']}")
+            time.sleep(3)
+            continue
+        amount_all = info['amount']
+        leftAmount = info['leftAmount']
+        if info['receiveList']:
+            msg = '💰提现金成功'
+            amount = info['receiveList'][0]['amount']
+            printf(cookie, f"{msg} 获得{amount},当前{amount_all},还差{leftAmount}")
+            if str(leftAmount) == "0.00":
                 break
-            elif "本场活动已结束" in info[1]:
-                printf(cookie, f"{info[0]} ⏰本场活动已结束了,快去重新开始吧")
-                break
-            else:
-                if info:
-                    total += 1
-                    if info[2] == 1:
-                        printf(cookie, f"{info[0]} 🎫获得{info[1]}优惠券")
-                    elif info[2] == 2:
-                        printf(cookie, f"{info[0]} 🧧获得{info[1]}红包")
-                        redpacket.append(info[1])
-                    else:
-                        printf(cookie, f"{info[0]} 💵获得{info[1]}现金")
-                        cash.append(info[1])
-            # # 提现金
-            # info = inviteFissionReceive(ua, cookie, "inviteFissionReceive", "b8469", {"linkId": linkId})
-            # if "火爆" in str(info):
-            #     printf(cookie, f"{info['errMsg']}")
-            #     continue
-            # amount_all = info['amount']
-            # leftAmount = info['leftAmount']
-            # if info['receiveList']:
-            #     msg = '💰提现金成功'
-            #     amount = info['receiveList'][0]['amount']
-            #     printf(cookie, f"{msg} 获得{amount},当前{amount_all},还差{leftAmount}")
-            # else:
-            #     msg = '❌提现金失败'
-            #     printf(cookie, f"{msg}")
-            time.sleep(1.5)
-
+        else:
+            msg = '❌提现金失败'
+            printf(cookie, f"{msg}")
+        time.sleep(1.5)
 
     print(f"\n****************抽奖结束,共抽奖{total}次,💵获得:{'{:.2f}'.format(sum([float(x) for x in cash]))}元现金,🧧获得:{'{:.2f}'.format(sum([float(x) for x in redpacket]))}元红包,开始提现****************\n")
 
     print(f"****************最大提现页数apCashPageSize设置为{apCashPageSize},请根据实际情况设置****************")
-    for index, linkId in enumerate(linkIds, 1):
-        i = 0
-        while True:
-            print(f"\n开始获取第{i + 1}页奖励列表\n")
-            body = {"pageNum": i, "pageSize": 20, "linkId": linkId, "business": "fission"}
-            info = superRedBagList(ua, cookie, "superRedBagList", "f2b1d", body)
-            if not info:
-                print("等待10s重新获取")
-                time.sleep(10)
-                continue
-            i += 1
-            items = info['items']
-            if not items:
-                printf(cookie, "全部提现完成！")
-                break
-            for item in items:
-                # printf(cookie, item)
-                id = item['id']
-                amount = item['amount']
-                prizeType = item['prizeType']
-                state = item['state']
-                prizeConfigName = item['prizeConfigName']
-                prizeGroupId = item['prizeGroupId']
-                poolBaseId = item['poolBaseId']
-                prizeBaseId = item['prizeBaseId']
-                if prizeType == 4 and state != 3 and state != 4:
-                    cashInfo = apCashWithDraw(cookie, id, poolBaseId, prizeGroupId, prizeBaseId)
-                    if cashInfo:
+    i = 0
+    while True:
+        print(f"\n开始获取第{i + 1}页奖励列表\n")
+        body = {"pageNum": i, "pageSize": 20, "linkId": linkId, "business": "fission"}
+        info = superRedBagList(ua, cookie, "superRedBagList", "f2b1d", body)
+        if not info:
+            print("等待10s重新获取")
+            time.sleep(10)
+            continue
+        i += 1
+        items = info['items']
+        if not items:
+            printf(cookie, "全部提现完成！")
+            break
+        for item in items:
+            # printf(cookie, item)
+            id = item['id']
+            amount = item['amount']
+            prizeType = item['prizeType']
+            state = item['state']
+            prizeConfigName = item['prizeConfigName']
+            prizeGroupId = item['prizeGroupId']
+            poolBaseId = item['poolBaseId']
+            prizeBaseId = item['prizeBaseId']
+            if prizeType == 4 and state != 3 and state != 4:
+                cashInfo = apCashWithDraw(cookie, id, poolBaseId, prizeGroupId, prizeBaseId)
+                if cashInfo:
+                    printf(cookie, f"{amount}现金 {cashInfo}")
+                    if "上限" in cashInfo or "其他pin" in cashInfo or "其它pin" in cashInfo:
+                        cashInfo = apRecompenseDrawPrize(cookie, id, poolBaseId, prizeGroupId, prizeBaseId)
                         printf(cookie, f"{amount}现金 {cashInfo}")
-                        if "上限" in cashInfo or "其他pin" in cashInfo or "其它pin" in cashInfo:
-                            cashInfo = apRecompenseDrawPrize(cookie, id, poolBaseId, prizeGroupId, prizeBaseId)
-                            printf(cookie, f"{amount}现金 {cashInfo}")
-                    time.sleep(2)
-                else:
-                    continue
+                time.sleep(2)
+            else:
+                continue
 
-            time.sleep(1)
+        time.sleep(1)
 
-            if i >= apCashPageSize:
-                break
+        if i >= apCashPageSize:
+            break

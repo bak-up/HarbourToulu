@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """
-File: jd_inviteDraw.py(邀好友抽现金助力)
+File: jd_inviteDraw_PDD.py(邀好友抽现金助力PDD)
 Author: HarbourJ
 Date: 2023/3/15 10:00
 TG: https://t.me/HarbourToulu
 cron: 30 0 0,20 * * *
-new Env('邀好友抽现金助力');
+new Env('邀好友抽现金助力PDD');
 ActivityEntry: https://prodev.m.jd.com/jdlite/active/23CeE8ZXA4uFS9M9mTjtta9T4S5x/index.html
 变量：export inviteDrawPin="车头pin"
 """
@@ -58,7 +58,7 @@ threadsNum = 1
 # 限制最大邀请数量
 number_restrictions = 5000
 
-linkIds = ['Wvzc_VpNTlSkiQdHT8r7QA', '3orGfh1YkwNLksxOcN8zWQ']
+linkId = 'EcuVpjGGfccY3Ic_1ni83w'
 power_success = []
 power_failure = []
 not_login= []
@@ -143,83 +143,79 @@ def convert_ms_to_hours_minutes(milliseconds):
     hours, minutes = divmod(minutes, 60)
     return f'{hours}h{minutes}m'
 
-def get_h5st_body (OOO00OOO0O0O00O0O ,O00OOOO0OOOOOOOO0 ,OO00000OOO0O0O0O0 ,OOOO00OO0O000OO00 ,O0OO0000O00O0000O ):#line:1
+def get_h5st_body (OO00O00O0O000O0O0 ,O0OO00000O0O0000O ,OOO00000O00O0000O ,OOO00O000OOOOOO0O ,OO0000OO0000O0O00 ):#line:1
     try :#line:2
-        OO0O0O0O0O0O00000 =re .compile (r'pt_pin=(.*?);').findall (O00OOOO0OOOOOOOO0 )[0 ]#line:3
-        OO0O0O0O0O0O00000 =unquote_plus (OO0O0O0O0O0O00000 )#line:4
+        O00O00O0OOO0O00O0 =re .compile (r'pt_pin=(.*?);').findall (O0OO00000O0O0000O )[0 ]#line:3
+        O00O00O0OOO0O00O0 =unquote_plus (O00O00O0OOO0O00O0 )#line:4
     except IndexError :#line:5
-        OO0O0O0O0O0O00000 =re .compile (r'pin=(.*?);').findall (O00OOOO0OOOOOOOO0 )[0 ]#line:6
-        OO0O0O0O0O0O00000 =unquote_plus (OO0O0O0O0O0O00000 )#line:7
-    O00OOO0OOOO0OOOOO =OOO00OOO0O0O00O0O .split (";")[2 ]#line:8
-    O0OO0000O00O0000O ={"appId":OOOO00OO0O000OO00 ,"appid":"activities_platform","ua":OOO00OOO0O0O00O0O ,"pin":OO0O0O0O0O0O00000 ,"functionId":OO00000OOO0O0O0O0 ,"body":O0OO0000O00O0000O ,"expand":{"url":"https://pro.m.jd.com/jdlite/active/23CeE8ZXA4uFS9M9mTjtta9T4S5x/index.html","og":"https://pro.m.jd.com"},"clientVersion":O00OOO0OOOO0OOOOO ,"version":"4.1"}#line:22
+        O00O00O0OOO0O00O0 =re .compile (r'pin=(.*?);').findall (O0OO00000O0O0000O )[0 ]#line:6
+        O00O00O0OOO0O00O0 =unquote_plus (O00O00O0OOO0O00O0 )#line:7
+    O0OO000OO0O00OO0O =OO00O00O0O000O0O0 .split (";")[2 ]#line:8
+    OO0000OO0000O0O00 ={"appId":OOO00O000OOOOOO0O ,"appid":"activities_platform","ua":OO00O00O0O000O0O0 ,"pin":O00O00O0OOO0O00O0 ,"functionId":OOO00000O00O0000O ,"body":OO0000OO0000O0O00 ,"expand":{"url":"https://pro.m.jd.com/jdlite/active/23CeE8ZXA4uFS9M9mTjtta9T4S5x/index.html","og":"https://pro.m.jd.com"},"clientVersion":O0OO000OO0O00OO0O ,"version":"4.1"}#line:22
     try :#line:23
         import base64 #line:24
-        OOOO0OOOO00O0O0O0 = ["aHR0cDovLzEuOTQuOC4yNDQ6MzAwMS9hcGkvaDVzdA==","aHR0cDovL2hhcmJvdXJqLmNmOjMwMDEvYXBpL2g1c3Q=","aHR0cDovLzEzMi4yMjYuMjM4LjE4NjozMDAxL2FwaS9oNXN0"] #line:25
-        OOOO0OOOO00O0O0O0 = random.choice(OOOO0OOOO00O0O0O0)
-        OO0OO000OOO00OOO0 =json .dumps (O0OO0000O00O0000O )#line:26
-        OO0000OOO0OOOO00O ={'Content-Type':'application/json'}#line:29
-        OO00OO0O00OO0OOOO =requests .request ("POST",base64 .b64decode (OOOO0OOOO00O0O0O0 .encode ('utf-8')).decode ('utf-8'),headers =OO0000OOO0OOOO00O ,timeout =10 ,data =OO0OO000OOO00OOO0 ).json ()#line:30
-        if OO00OO0O00OO0OOOO ['code']==200 :#line:31
-            return OO00OO0O00OO0OOOO ['data']#line:33
+        O0OO000000O0OOO00 = ["aHR0cDovLzEuOTQuOC4yNDQ6MzAwMS9hcGkvaDVzdA==","aHR0cDovL2hhcmJvdXJqLmNmOjMwMDEvYXBpL2g1c3Q=","aHR0cDovLzEzMi4yMjYuMjM4LjE4NjozMDAxL2FwaS9oNXN0"] #line:25
+        O0OO000000O0OOO00 = random.choice(O0OO000000O0OOO00)
+        O00000OO0000OO00O =json .dumps (OO0000OO0000O0O00 )#line:26
+        OOOOO0O0O00OOO0OO ={'Content-Type':'application/json'}#line:29
+        OOO0O00OOOOOOOO0O =requests .request ("POST",base64 .b64decode (O0OO000000O0OOO00 .encode ('utf-8')).decode ('utf-8'),headers =OOOOO0O0O00OOO0OO ,timeout =10 ,data =O00000OO0000OO00O ).json ()#line:30
+        if OOO0O00OOOOOOOO0O ['code']==200 :#line:31
+            return OOO0O00OOOOOOOO0O ['data']#line:33
         else :#line:34
-            printf (O00OOOO0OOOOOOOO0 ,f"调用远程h5st接口失败1")#line:35
+            printf (O0OO00000O0O0000O ,f"调用远程h5st接口失败1")#line:35
             return #line:36
-    except Exception as O000O0O0O0OOO0OO0 :#line:37
-        printf (O00OOOO0OOOOOOOO0 ,f"调用远程h5st接口失败2:{O000O0O0O0OOO0OO0}")#line:38
-        get_h5st_body (OOO00OOO0O0O00O0O ,O00OOOO0OOOOOOOO0 ,OO00000OOO0O0O0O0 ,OOOO00OO0O000OO00 ,O0OO0000O00O0000O )#line:39
+    except Exception as O000OOOO0OOO00O00 :#line:37
+        printf (O0OO00000O0O0000O ,f"调用远程h5st接口失败2:{O000OOOO0OOO00O00}")#line:38
+        get_h5st_body (OO00O00O0O000O0O0 ,O0OO00000O0O0000O ,OOO00000O00O0000O ,OOO00O000OOOOOO0O ,OO0000OO0000O0O00 )#line:39
         return #line:40
-def H5API (OOOOO0000OO0OOO0O ,OOO0OO00O0000000O ,OOO0O0000OO000000 ,O00O0O0OO00O00OOO ,OO0O0O00O000OO000 ,proxies =None ):#line:42
-    O0OOOOO0OO0O0O000 ="https://api.m.jd.com"#line:43
-    O00O0O0O0OOO0OO00 ={"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Accept-Language":"zh-cn","Connection":"keep-alive","Content-Type":"application/x-www-form-urlencoded","Host":"api.m.jd.com","Referer":"https://prodev.m.jd.com/","Origin":"https://prodev.m.jd.com","Cookie":OOO0OO00O0000000O ,"User-Agent":OOOOO0000OO0OOO0O ,}#line:55
-    O0O0000OOOO0O0OOO =get_h5st_body (OOOOO0000OO0OOO0O ,OOO0OO00O0000000O ,OOO0O0000OO000000 ,OO0O0O00O000OO000 ,O00O0O0OO00O00OOO )#line:56
-    if not O0O0000OOOO0O0OOO :#line:57
+def H5API (O0OO00O0OO0OO0000 ,OOO0000O00O000OO0 ,OO0OO00000O00O0O0 ,O0OOOOOOOO0OO00OO ,O000O000OOO00OOO0 ,proxies =None ):#line:42
+    O000O0O0OOOO0000O ="https://api.m.jd.com"#line:43
+    O0O0OOO00OO00OO0O ={"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Accept-Language":"zh-cn","Connection":"keep-alive","Content-Type":"application/x-www-form-urlencoded","Host":"api.m.jd.com","Referer":"https://prodev.m.jd.com/","Origin":"https://prodev.m.jd.com","Cookie":OOO0000O00O000OO0 ,"User-Agent":O0OO00O0OO0OO0000 ,}#line:55
+    O0O0000O0OO00OOO0 =get_h5st_body (O0OO00O0OO0OO0000 ,OOO0000O00O000OO0 ,OO0OO00000O00O0O0 ,O000O000OOO00OOO0 ,O0OOOOOOOO0OO00OO )#line:56
+    if not O0O0000O0OO00OOO0 :#line:57
         return #line:58
-    O00O0O0OO00O00OOO =O0O0000OOOO0O0OOO #line:59
+    O0OOOOOOOO0OO00OO =O0O0000O0OO00OOO0 #line:59
     try :#line:60
-        OO000O00OOOO0OO0O =requests .post (O0OOOOO0OO0O0O000 ,headers =O00O0O0O0OOO0OO00 ,data =O00O0O0OO00O00OOO ,timeout =5 ,proxies =proxies )#line:61
-    except Exception as O0O0OO0OO0OOO0OOO :#line:62
-        printf (OOO0OO00O0000000O ,f"H5API Error:{str(O0O0OO0OO0OOO0OOO)}")#line:63
+        O00000OOO00OOOOOO =requests .post (O000O0O0OOOO0000O ,headers =O0O0OOO00OO00OO0O ,data =O0OOOOOOOO0OO00OO ,timeout =5 ,proxies =proxies )#line:61
+    except Exception as OO000000OO000O000 :#line:62
+        printf (OOO0000O00O000OO0 ,f"H5API Error:{str(OO000000OO000O000)}")#line:63
         return #line:64
-    if OO000O00OOOO0OO0O .status_code ==200 :#line:65
-        return OO000O00OOOO0OO0O #line:66
+    if O00000OOO00OOOOOO .status_code ==200 :#line:65
+        return O00000OOO00OOOOOO #line:66
     else :#line:67
-        printf (OOO0OO00O0000000O ,OO000O00OOOO0OO0O .status_code )#line:68
-def Result (O0000000OO00000OO ,OOOO0O0OO00O0O000 ,OOO0O0O0OO0OO0OO0 ,O000000000O0OOOOO ):#line:70
-    for OOOO000OO0OOOO0OO ,O0000OO0O0OOO0000 in enumerate (linkIds ,1 ):#line:71
-        O0000OO000OOOOOO0 =H5API (O0000000OO00000OO ,OOOO0O0OO00O0O000 ,"inviteFissionhelp",{'linkId':O0000OO0O0OOO0000 ,"isJdApp":True ,'inviter':OOO0O0O0OO0OO0OO0 },'02f8d',O000000000O0OOOOO )#line:72
-        if not O0000OO000OOOOOO0 :#line:73
-            return #line:74
-        if int (O0000OO000OOOOOO0 .status_code )!=int (200 ):#line:75
-            printf (OOOO0O0OO00O0O000 ,f'接口：{O0000OO000OOOOOO0.status_code}')#line:76
-            return #line:77
-        if int (O0000OO000OOOOOO0 .json ()['code'])==0 :#line:78
-            if O0000OO000OOOOOO0 .json ()['data']['helpResult']==1 :#line:79
-                O000OO00O000O0OO0 ='✅助力成功'#line:80
-                power_success .append (OOOO0O0OO00O0O000 )#line:81
-            elif O0000OO000OOOOOO0 .json ()['data']['helpResult']==2 :#line:82
-                O000OO00O000O0OO0 ='❌火爆...助力失败'#line:83
-                power_failure .append (OOOO0O0OO00O0O000 )#line:84
-            elif O0000OO000OOOOOO0 .json ()['data']['helpResult']==3 :#line:85
-                O000OO00O000O0OO0 ='❌已经助力别人'#line:86
-                power_failure .append (OOOO0O0OO00O0O000 )#line:87
-            elif O0000OO000OOOOOO0 .json ()['data']['helpResult']==4 :#line:88
-                O000OO00O000O0OO0 ='❌助力次数用完了'#line:89
-                power_failure .append (OOOO0O0OO00O0O000 )#line:90
-            elif O0000OO000OOOOOO0 .json ()['data']['helpResult']==6 :#line:91
-                O000OO00O000O0OO0 ='❌已经助力过了'#line:92
-                power_failure .append (OOOO0O0OO00O0O000 )#line:93
-            else :#line:94
-                O000OO00O000O0OO0 ='❌未知状态'#line:95
-                power_failure .append (OOOO0O0OO00O0O000 )#line:96
-            if OOOO000OO0OOOO0OO ==1 :#line:97
-                O00000OO0O00O00O0 ="JX"#line:98
-            else :#line:99
-                O00000OO0O00O00O0 ="JD"#line:100
-            printf (OOOO0O0OO00O0O000 ,f"{O0000OO000OOOOOO0.status_code}【{O00000OO0O00O00O0}】助力-→{O0000OO000OOOOOO0.json()['data']['nickName']}|{O0000OO000OOOOOO0.json()['data']['helpResult']} {O000OO00O000O0OO0}")#line:101
-        else :#line:102
-            printf (OOOO0O0OO00O0O000 ,f"{O0000OO000OOOOOO0.json()['code']}  💔{O0000OO000OOOOOO0.json()['errMsg']}")#line:103
-            not_login .append (OOOO0O0OO00O0O000 )
-
+        printf (OOO0000O00O000OO0 ,O00000OOO00OOOOOO .status_code )#line:68
+def Result (OO0000OO0000O00O0 ,O0000000OOO00OO0O ,OOO00O0O000OO0O0O ,OO00OOO0O0000O000 ):#line:70
+    if O0000000OOO00OO0O [-1 ]!=";":#line:71
+        O0000000OOO00OO0O +=";"#line:72
+    OO00O000O0O000OOO =H5API (OO0000OO0000O00O0 ,O0000000OOO00OO0O ,"inviteFissionhelp",{'linkId':linkId ,"isJdApp":True ,'inviter':OOO00O0O000OO0O0O ,"clientFirstLaunchInfo":"","userFirstLaunchInfo":""},'c5389',OO00OOO0O0000O000 )#line:73
+    if not OO00O000O0O000OOO :#line:75
+        return #line:76
+    if int (OO00O000O0O000OOO .status_code )!=int (200 ):#line:77
+        printf (O0000000OOO00OO0O ,f'接口：{OO00O000O0O000OOO.status_code}')#line:78
+        return #line:79
+    if int (OO00O000O0O000OOO .json ()['code'])==0 :#line:80
+        if OO00O000O0O000OOO .json ()['data']['helpResult']==1 :#line:81
+            O000O0OO00O000000 ='✅助力成功'#line:82
+            power_success .append (O0000000OOO00OO0O )#line:83
+        elif OO00O000O0O000OOO .json ()['data']['helpResult']==2 :#line:84
+            O000O0OO00O000000 ='❌火爆...助力失败'#line:85
+            power_failure .append (O0000000OOO00OO0O )#line:86
+        elif OO00O000O0O000OOO .json ()['data']['helpResult']==3 :#line:87
+            O000O0OO00O000000 ='❌已经助力别人'#line:88
+            power_failure .append (O0000000OOO00OO0O )#line:89
+        elif OO00O000O0O000OOO .json ()['data']['helpResult']==4 :#line:90
+            O000O0OO00O000000 ='❌助力次数用完了'#line:91
+            power_failure .append (O0000000OOO00OO0O )#line:92
+        elif OO00O000O0O000OOO .json ()['data']['helpResult']==6 :#line:93
+            O000O0OO00O000000 ='❌已经助力过了'#line:94
+            power_failure .append (O0000000OOO00OO0O )#line:95
+        else :#line:96
+            O000O0OO00O000000 ='❌未知状态'#line:97
+            power_failure .append (O0000000OOO00OO0O )#line:98
+        printf (O0000000OOO00OO0O ,f"{OO00O000O0O000OOO.status_code}【JDPDD】助力-→{OO00O000O0O000OOO.json()['data']['nickName']}|{OO00O000O0O000OOO.json()['data']['helpResult']} {O000O0OO00O000000}")#line:99
+    else :#line:100
+        printf (O0000000OOO00OO0O ,f"{OO00O000O0O000OOO.json()['code']}  💔{OO00O000O0O000OOO.json()['errMsg']}")#line:101
+        not_login .append (O0000000OOO00OO0O )
 
 if __name__ == '__main__':
     try:
@@ -241,25 +237,19 @@ if __name__ == '__main__':
     else:
         print("未设置inviteDrawPin车头,默认CK1作为车头")
         cookie = cks[0]
-    # 获取车头助力码
     ua = userAgent()
-    for index, linkId in enumerate(linkIds, 1):
-        response = H5API(ua, cookie, "inviteFissionhelp", {'linkId': linkId, "isJdApp": True, 'inviter': inviter}, '02f8d').json()
-        if response['success'] == False and response['code'] == 1000:
-            printf(cookie, f"{response['errMsg']}")
-            sys.exit()
-        if response['data']['helpResult'] == 1:
-            printf(cookie, f'✅助力作者成功 谢谢你 你是个好人！！！')
-        else:
-            printf(cookie, f'❌助理作者失败 下次记得把助理留给我 呜呜呜！！！')
-        response = H5API(ua, cookie, 'inviteFissionHome', {'linkId': linkId, "inviter": ""}, 'af89e').json()
-        if index == 1:
-            printf(cookie, f'【JX】⏰剩余时间:{convert_ms_to_hours_minutes(response["data"]["countDownTime"])} 🎉已获取助力{response["data"]["prizeNum"] + response["data"]["drawPrizeNum"]}次 ✅【助力码】:{response["data"]["inviter"]}')
-            prizeNum1 = response["data"]["prizeNum"] + response["data"]["drawPrizeNum"]
-        else:
-            printf(cookie, f'【JD】⏰剩余时间:{convert_ms_to_hours_minutes(response["data"]["countDownTime"])} 🎉已获取助力{response["data"]["prizeNum"] + response["data"]["drawPrizeNum"]}次 ✅【助力码】:{response["data"]["inviter"]}')
-            prizeNum2 = response["data"]["prizeNum"] + response["data"]["drawPrizeNum"]
-        inviter = response["data"]["inviter"]
+    response = H5API(ua, cookie, "inviteFissionhelp", {'linkId':linkId, "isJdApp":True, 'inviter':inviter, "clientFirstLaunchInfo": "", "userFirstLaunchInfo": ""}, 'c5389').json()
+    if response['success'] == False and response['code'] == 1000:
+        printf(cookie, f"{response['errMsg']}")
+        sys.exit()
+    if response['data']['helpResult'] == 1:
+        printf(cookie, f'✅助力作者成功 谢谢你 你是个好人！！！')
+    else:
+        printf(cookie, f'❌助理作者失败 下次记得把助理留给我 呜呜呜！！！')
+    response = H5API(ua, cookie, 'inviteFissionHome', {'linkId': linkId, "inviter": ""}, 'eb67b').json()
+    printf(cookie, f'【JDPDD】⏰剩余时间:{convert_ms_to_hours_minutes(response["data"]["countDownTime"])} 🎉已获取助力{response["data"]["prizeNum"] + response["data"]["drawPrizeNum"]}次 💰领现金进度{response["data"]["cashVo"]["amount"]}/{response["data"]["cashVo"]["totalAmount"]} ✅【助力码】:{response["data"]["inviter"]}')
+    prizeNum2 = response["data"]["prizeNum"] + response["data"]["drawPrizeNum"]
+    inviter = response["data"]["inviter"]
 
     time.sleep(1)
     new_cks = list_of_groups(cks, threadsNum)
