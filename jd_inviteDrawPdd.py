@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """
-File: jd_inviteDraw.py(邀好友抽现金助力)
+File: jd_inviteDrawPdd.py(转赚邀好友抽现金助力JD)
 Author: HarbourJ
 Date: 2023/3/15 10:00
 TG: https://t.me/HarbourToulu
 cron: 30 0 0,12,20 * * *
-new Env('邀好友抽现金助力');
+new Env('转赚邀好友抽现金助力JD');
 ActivityEntry: 京东-天天赚红包-转赚红包
 变量：export inviteDrawPin="车头pin"
 """
@@ -83,7 +83,7 @@ def get_proxies (OOOO0OO000O00OOO0 ):#line:17
     try :#line:19
         O00OOO0OO0O00OOOO =requests .get ("https://pycn.yapi.py.cn/get_client_ip").json ()["ret_data"]#line:20
     except :#line:21
-        O00OOO0OO0O00OOOO =requests .get ("https://ifconfig.me/").text #line:22
+        O00OOO0OO0O00OOOO =requests .get ("https://ifconfig.me/ip").text #line:22
     print (f"获取当前IP:{O00OOO0OO0O00OOOO}")#line:23
     if proxyType =="":#line:25
         print ('当前使用本地ip,若需使用品易代理,参数proxyType="1";星空代理,参数proxyType="2";小象代理,参数proxyType="3";携趣代理,参数proxyType="4"')#line:26
@@ -150,7 +150,7 @@ def get_h5st_body (OO0OOO0OOOOO0O0O0 ,OOOOOOO0OO0OOO0OO ,O00O00OO00O0OO000 ,OO0O
     try :#line:111
         O00OO0OO00O0O000O =json .dumps (O0O0OOO0000OOOO00 )#line:112
         O0OO0OOO0OOO00000 ={'Content-Type':'application/json'}#line:115
-        OOOO0OO0OOO0O0O0O =["aHR0cDovLzEuMTQuMjA4LjE3ODozMDAyL2FwaS9oNXN0","aHR0cDovLzE0MS4xNDQuMjI1LjI1MDozMDAyL2FwaS9oNXN0","aHR0cDovLzEuOTQuOC4yNDQ6MzAwMi9hcGkvaDVzdA=="]#line:116
+        OOOO0OO0OOO0O0O0O = ["aHR0cDovLzEuMTQuMjA4LjE3ODozMDAyL2FwaS9oNXN0","aHR0cDovLzE0MS4xNDQuMjI1LjI1MDozMDAyL2FwaS9oNXN0","aHR0cDovLzEuOTQuOC4yNDQ6MzAwMi9hcGkvaDVzdA=="]  # line:116
         O000O0OOOOO00O0O0 =random .choice (OOOO0OO0OOO0O0O0O )#line:117
         OOOOO00OOO0OO0000 =requests .request ("POST",base64 .b64decode (O000O0OOOOO00O0O0 .encode ('utf-8')).decode ('utf-8'),headers =O0OO0OOO0OOO00000 ,timeout =10 ,data =O00OO0OO00O0O000O ).json ()#line:118
         if OOOOO00OOO0OO0000 ['code']==200 :#line:119
@@ -239,11 +239,19 @@ if __name__ =='__main__':#line:194
         if response ['success']==False and response ['code']==1000 :#line:217
             printf (cookie ,f"{response['errMsg']}")#line:218
             sys .exit ()#line:219
-        if response ['data']['helpResult']==1 :#line:220
-            printf (cookie ,f'✅助力作者成功 谢谢你 你是个好人！！！')#line:221
-        else :#line:222
-            printf (cookie ,f'❌助理作者失败 下次记得把助理留给我 呜呜呜！！！')#line:223
-            response =H5API (ua ,cookie ,'inviteFissionHome',{'linkId':linkId ,"inviter":""},'eb67b').json ()#line:224
+        time.sleep(0.1)
+        response = H5API(ua, cookie, "inviteFissionhelp", {'linkId':linkId, "isJdApp":True, 'inviter':inviter}, 'c5389')
+        if int(response.status_code) != 200:
+            printf(cookie, f'接口：{response.status_code}')
+            sys.exit()
+        if int(response.json()['code']) == 0:
+            if response.json()['data']['helpResult'] == 1:  # line:220
+                printf(cookie, f'✅助力作者成功 谢谢你 你是个好人！！！')  # line:221
+            else:  # line:222
+                printf(cookie, f'❌助理作者失败 下次记得把助理留给我 呜呜呜！！！')  # line:223
+        else:
+            printf(cookie, f"{response.json()['code']}  💔{response.json()['errMsg']}")
+        response =H5API (ua ,cookie ,'inviteFissionHome',{'linkId':linkId ,"inviter":""},'eb67b').json ()#line:224
         if index ==1 :#line:225
             printf (cookie ,f'【JD】⏰剩余时间:{convert_ms_to_hours_minutes(response["data"]["countDownTime"])} 🎉已获取助力{response["data"]["prizeNum"] + response["data"]["drawPrizeNum"]}次 ✅【助力码】:{response["data"]["inviter"]}')#line:226
             prizeNum1 =response ["data"]["prizeNum"]+response ["data"]["drawPrizeNum"]#line:227
